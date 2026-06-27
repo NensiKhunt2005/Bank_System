@@ -1,0 +1,85 @@
+{% include 'header.html' %}
+{% load static %}
+
+
+<!doctype html>
+<html lang="en" dir="ltr">
+
+
+<!-- Mirrored from themewant.com/products/dashboard/geex/signin.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Nov 2024 06:31:18 GMT -->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Banking Syste</title>
+
+	<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+
+	<!-- inject:css-->
+	<link rel="stylesheet" href="{% static 'assets/vendor/css/bootstrap/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'unpkg.com/swiper%4011.1.15/swiper-bundle.min.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+	<!-- endinject -->
+	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/img/banklogo.png' %}">
+	<!-- Fonts -->
+	<link rel="stylesheet" href="{% static 'cdn.jsdelivr.net/npm/%40iconscout/unicons%404.0.8/css/line.min.css' %}">
+	
+    <script>
+		// Render localStorage JS:
+		if (localStorage.theme) document.documentElement.setAttribute("data-theme", localStorage.theme);
+		if (localStorage.layout) document.documentElement.setAttribute("data-nav", localStorage.navbar);
+		if (localStorage.layout) document.documentElement.setAttribute("dir", localStorage.layout);
+    </script>	
+</head>
+
+<body class="geex-dashboard authentication-page">
+	<main class="geex-content">
+		<div class="geex-content__authentication">
+			<div class="geex-content__authentication__content">
+				<div class="geex-content__authentication__content__wrapper">
+					<div class="geex-content__authentication__content__logo">
+						<a href="index.html">
+							<img class="logo-lite" src="{% static 'assets/img/banklogo.png' %}" alt="logo">
+							<img class="logo-dark" src="{% static 'assets/img/banklogo.png' %}" alt="logo">
+						</a>
+					</div>
+					<form id="signInForm" class="geex-content__authentication__form" method="POST">
+						{% csrf_token %}
+						<h2 class="geex-content__authentication__title">Deposit</h2>
+						<div class="geex-content__authentication__form-group">
+							<label for="emailSignIn">Account Number</label>
+							<input type="text" id="emailSignIn" name="acc_no" placeholder="Enter Account Number">
+							<!-- <i class="uil-envelope"></i> -->
+						</div>
+						<div class="geex-content__authentication__form-group">
+							<div class="geex-content__authentication__label-wrapper">
+								<label for="loginPassword">Deposit Amount</label>
+								<!-- <a href="forgot-password.html">Forgot Password?</a> -->
+							</div>
+							<input type="text" id="loginPassword" name="deposit" placeholder="enter amount">
+							<!-- <i class="uil-eye toggle-password-type"></i> -->
+						</div>
+						<button type="submit" class="geex-content__authentication__form-submit">Deposit</button>
+						<!-- <a href="/dashboard/">
+							<button type="submit" class="geex-content__authentication__form-submit">Go Back</button>
+						</a> -->
+					</form>
+				</div>
+			</div>	
+			<!-- <div class="geex-content__authentication__img">
+				<img src="{% static 'assets/img/authentication.svg' %}" alt="">
+			</div> -->
+		</div>
+	</main>
+
+	<!-- inject:js-->
+	<script src="{% static 'assets/vendor/js/jquery/jquery-3.5.1.min.js' %}"></script>
+	<script src="{% static 'assets/vendor/js/jquery/jquery-ui.js' %}"></script>
+	<script src="{% static 'assets/vendor/js/bootstrap/bootstrap.min.js' %}"></script>
+	<script src="{% static 'assets/js/main.js' %}"></script>
+	<!-- endinject-->
+</body>
+
+
+<!-- Mirrored from themewant.com/products/dashboard/geex/signin.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Nov 2024 06:31:19 GMT -->
+</html>

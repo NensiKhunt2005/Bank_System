@@ -1,0 +1,90 @@
+{% include 'header.html' %}
+
+
+
+<div class="geex-content">
+    <div class="geex-content__header">
+        <div class="geex-content__header__content">
+            <h2 class="geex-content__header__title">Your Total EMI</h2>
+            <!-- <p class="geex-content__header__subtitle">Form Elements is used to style and format the input field</p> -->
+        </div>
+    </div> 
+    <div class="geex-content__section geex-content__form">
+        <div class="col-15">
+            <form action="/cut_emi/" method="POST">
+                {% csrf_token %}
+                <table width="100%" class="table table-border" class="table table-dark table-hover">
+                    <tr align="center">
+                        <th>EMI NO</th>
+                        <th>EMI</th>
+                        <th>Principal Amount</th>
+                        <th>Interest</th>
+                        <th>Balance</th>
+                        <th>Pay</th>
+                    </tr>
+                    {% for ei,i,j,k,l in zip %}
+                        <tr align="center">
+                            <td>{{ei}}</td>
+                            <td>{{i}}</td>
+                            <td>{{j}}</td>
+                            <td>{{k}}</td>
+                            <td>{{l}}</td> 
+                            <td>
+                                <button class="geex-content__authentication__form-submit" value="{{ei}}" style="height: 30px; width:80px; margin-top: 1px; margin-bottom: 0px;" name="pay">Pay</button>
+                            </td>
+                        </tr>
+                    {% endfor  %}
+                    <tr>
+                        
+                    </tr>
+                </table>  
+            </form> 
+        </div>    
+        <!-- <form action="/final_emi/" method="post"> 
+            {% csrf_token %}
+            <div class="col-7">
+                <table width="35%" class="table table-borderless" >
+                    <tr>
+                        <td><h3>Loan</h3></td>
+                        <td>:</td>
+                        <td><h3>{{data.loan_name}}</h3></td> 
+                    </tr>
+                    <tr>
+                        <td><h3>Rate</h3></td>
+                        <td>:</td>
+                        <td><h3>{{data.rate}}</h3></td>
+                    </tr>
+                    <tr>
+                        <td><h3>Year</h3></td>
+                        <td>:</td>
+                        <td><h3>{{data.year}}</h3></td>
+                    </tr>
+                    <tr>
+                        <td><h3>Amount</h3></td>
+                        <td>:</td>
+                        <td><h3>{{data.amount}}</h3></td>
+                    </tr>
+                    <tr>
+                        <td><h3>Total amount</h3></td>
+                        <td>:</td>
+                        <td><h3>{{data.total_amt}}</h3></td>
+                    </tr>
+                    <tr>
+                        <td><h3>EMI</h3></td>
+                        <td>:</td>
+                        <td>
+                            <div class="geex-content__form__single__box mb-20">
+                                <input placeholder="Enter EMI" class="form-control" name="emi" id="geex-input2" value="" type="text" onkeypress="return event.charCode>=48 && event.charCode<=57" required style="height: 40px;" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <input type="submit" class="geex-content__authentication__form-submit" value="Apply for loan"></input> 
+
+    </form> -->
+    </div>
+</div>
+    
+
+{% include 'footer.html' %}

@@ -1,0 +1,138 @@
+{% include 'header.html' %}
+{% load static %}
+<script src="{% static 'jquery-3.7.1.min.js' %}"></script>
+<script>
+    $(document).ready(function() {
+        $('input[type="radio"]').click(function() {
+            var l_name=$(this).val();
+            $.ajax({
+                url: '{% url "loan_rate" %}',
+                type:'POST',
+                data:{key:l_name},
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                success: function(data1) {
+                    // document.write(data1)
+                    $('#geex-input1').val(data1.rate);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    function checkRadio(){
+        var radios=document.getElementsByName('loan');
+        var isChecked=false;
+
+        for(var i=0;i<radios.length;i++){
+            if(radios[i].checked){
+                isChecked=true;
+                break;
+            }
+        }
+
+        if(!isChecked){
+            alert('Please select any one loan type..!')
+        }
+    }
+</script>
+
+
+<div class="geex-content">
+    <!-- <div class="geex-content__header">
+        <div class="geex-content__header__content">
+            <h2 class="geex-content__header__title">Loan-Form</h2>
+            <p class="geex-content__header__subtitle">Form Elements is used to style and format the input field</p>
+        </div>
+    </div> -->
+    <div class="geex-content__section geex-content__form">
+        <div style="margin: 5px; padding: 20px;" class="col-20">
+            <form action="/display_emi/" method="POST">
+                {% csrf_token %}
+                <table  width="100%" class="table table-border">    
+                    <h2>Previous Loan</h2>
+                        {% if l_name %}
+                            {% for i in l_name %}
+                            <tr>
+                                <td style="width: 90%;"><h4 style="margin: 5px;">{{i}}</h4></td>
+                                <td><button class="geex-content__authentication__form-submit" value="{{i}}" name="loan" style="height: 30px; width:80px; margin-top: 1px; margin-bottom: 0px;" name="pay">Display</button> </td>
+                            </tr>
+                            {% endfor %}
+                        
+                        {% elif msg %}
+                            <h4>{{msg}}</h4>
+                        {% endif %}
+                </table>
+            </form>
+        </div>
+
+        <br>
+        {% if l_lenght < 3 %}
+        <form method="POST" action="/loan_rate1/">
+            {% csrf_token %}
+            <div class="geex-content__form__wrapper__item geex-content__form__right">
+                <div class="geex-content__form__single">
+                    <h4 class="geex-content__form__single__label">Select Loan</h4>
+                    <div class="geex-content__form__single__box">
+                        <div class="form-check success">
+                            <input class="form-check-input" type="radio" value="Home" name="loan" id="geex-checkbox1" required/>
+                            <label class="form-check-label" for="geex-checkbox1" >
+                                Home Loan
+                            </label>
+                        </div>
+                        <div class="form-check warning">
+                            <input class="form-check-input" type="radio" value="Gold" name="loan" id="geex-checkbox2" required />
+                                <label class="form-check-label" for="geex-checkbox2">
+                                    Gold Loan
+                                </label>
+                        </div>
+                        <div class="form-check danger">
+                            <input class="form-check-input" type="radio" value="Personal" name="loan" id="geex-checkbox3" required/>
+                            <label class="form-check-label" for="geex-checkbox3">
+                                Personal Loan
+                            </label>
+                        </div>
+                        <div class="form-check info">
+                            <input class="form-check-input" type="radio" value="Car" name="loan" id="geex-checkbox4" required/>
+                            <label class="form-check-label" for="geex-checkbox4">
+                                Car Loan
+                            </label>
+                        </div>
+                        <div class="form-check default">
+                            <input class="form-check-input" type="radio" value="Educational" name="loan" id="geex-checkbox5" required/>
+                            <label class="form-check-label" for="geex-checkbox5">
+                                Education
+                            </label>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- <div class="geex-content__form__single"> -->
+                        <h4 class="geex-content__form__single__label">Default Input</h4>
+                        <div class="geex-content__form__single__box mb-20">
+                            <input placeholder="Insert amount" class="form-control" name="amt" id="geex-input2" type="text" value="" onkeypress="return event.charCode>=48 && event.charCode<=57" required />
+                            <input placeholder="Insert year" class="form-control" name="yr" id="geex-input2" value="" type="text" onkeypress="return event.charCode>=48 && event.charCode<=57"  required/>
+                        </div>
+                        <div class="geex-content__form__single__box">
+                            <div class="input-icon">
+                                <!-- <i class="uil uil-dollar-alt"></i> -->
+                                <input placeholder="Your rate" class="form-control" id="geex-input1" value="{{data1.rate }}" required  disabled/>
+                            </div>
+                            <div class="input-icon">
+                                <!-- <i class="uil uil-dollar-alt"></i>
+                                <input placeholder="Your total amount" class="form-control" id="geex-input2" /> -->
+                            </div>
+                        </div>
+                    <!-- </div> -->
+                </div>
+            </div>
+            <input type="submit" class="geex-content__authentication__form-submit" value="Apply for loan" onclick="checkRadio()"></input>
+        
+        </form>
+        {% else %}
+        <h3>{{request.session.msg1}}</h3>
+
+        {% endif %}
+    </div>
+</div>
+{% include 'footer.html' %}
